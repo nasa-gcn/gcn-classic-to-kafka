@@ -8,50 +8,18 @@
 """Command line interface."""
 import asyncio
 import logging
-import os
-import re
 import urllib
 import signal
 import sys
 
 import click
-import confluent_kafka
+import gcn_kafka
 import prometheus_client
 
 from .socket import client_connected
 from . import metrics
 
 log = logging.getLogger(__name__)
-
-env_key_splitter = re.compile(r'_+')
-replacement_dict = {'_': '.', '__': '-', '___': '_'}
-
-
-def replacement(match: re.Match) -> str:
-    text = match[0]
-    return replacement_dict.get(text) or text
-
-
-def kafka_config_from_env(env: dict[str, str], prefix: str) -> dict[str, str]:
-    """Construct a Kafka client configuration dictionary from env variables.
-
-    This uses the same rules as
-    https://docs.confluent.io/platform/current/installation/docker/config-reference.html
-    to convert from configuration variables to environment variable names:
-
-    * Start the environment variable name with the given prefix.
-    * Convert to upper-case.
-    * Replace periods (`.`) with single underscores (`_`).
-    * Replace dashes (`-`) with double underscores (`__`).
-    * Replace underscores (`-`) with triple underscores (`___`).
-
-    """
-    config = {}
-    for key, value in env.items():
-        if key.startswith(prefix):
-            key = env_key_splitter.sub(replacement, key.removeprefix(prefix))
-            config[key.lower()] = value
-    return config
 
 
 def signal_handler(signum, frame):
@@ -100,11 +68,11 @@ def main(listen, prometheus, loglevel):
                                         prometheus.hostname or '0.0.0.0')
     log.info('Prometheus listening on %s', prometheus.netloc)
 
-    config = kafka_config_from_env(os.environ, 'KAFKA_')
+    config = gcn_kafka.config_from_env()
     config['client.id'] = __package__
     config['on_delivery'] = kafka_delivered_cb
 
-    producer = confluent_kafka.Producer(config)
+    producer = gcn_kafka.Producer(config)
     client = client_connected(producer)
 
     async def serve():

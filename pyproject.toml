@@ -7,7 +7,7 @@ authors = ["Leo Singer <leo.singer@ligo.org>"]
 
 [tool.poetry.dependencies]
 click = "*"
-confluent-kafka = "^1.9.2"
+gcn-kafka = "^0.2.0"
 python = "^3.9"
 pygcn = "*"
 prometheus-client = "^0.14.1"
