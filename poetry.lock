@@ -15,10 +15,10 @@ optional = false
 python-versions = ">=3.5"
 
 [package.extras]
-tests_no_zope = ["cloudpickle", "pytest-mypy-plugins", "mypy (>=0.900,!=0.940)", "pytest (>=4.3.0)", "pympler", "hypothesis", "coverage[toml] (>=5.0.2)"]
-tests = ["cloudpickle", "zope.interface", "pytest-mypy-plugins", "mypy (>=0.900,!=0.940)", "pytest (>=4.3.0)", "pympler", "hypothesis", "coverage[toml] (>=5.0.2)"]
-docs = ["sphinx-notfound-page", "zope.interface", "sphinx", "furo"]
-dev = ["cloudpickle", "pre-commit", "sphinx-notfound-page", "sphinx", "furo", "zope.interface", "pytest-mypy-plugins", "mypy (>=0.900,!=0.940)", "pytest (>=4.3.0)", "pympler", "hypothesis", "coverage[toml] (>=5.0.2)"]
+dev = ["cloudpickle", "coverage[toml] (>=5.0.2)", "furo", "hypothesis", "mypy (>=0.900,!=0.940)", "pre-commit", "pympler", "pytest (>=4.3.0)", "pytest-mypy-plugins", "sphinx", "sphinx-notfound-page", "zope.interface"]
+docs = ["furo", "sphinx", "sphinx-notfound-page", "zope.interface"]
+tests = ["cloudpickle", "coverage[toml] (>=5.0.2)", "hypothesis", "mypy (>=0.900,!=0.940)", "pympler", "pytest (>=4.3.0)", "pytest-mypy-plugins", "zope.interface"]
+tests_no_zope = ["cloudpickle", "coverage[toml] (>=5.0.2)", "hypothesis", "mypy (>=0.900,!=0.940)", "pympler", "pytest (>=4.3.0)", "pytest-mypy-plugins"]
 
 [[package]]
 name = "authlib"
@@ -89,12 +89,12 @@ optional = false
 python-versions = "*"
 
 [package.extras]
+avro = ["avro (==1.10.0)", "fastavro (>=0.23.0,<1.0)", "fastavro (>=1.0)", "requests"]
+dev = ["avro (==1.10.0)", "fastavro (>=0.23.0,<1.0)", "fastavro (>=1.0)", "flake8", "pytest", "pytest (==4.6.4)", "pytest-timeout", "requests"]
+doc = ["avro (==1.10.0)", "fastavro (>=0.23.0,<1.0)", "fastavro (>=1.0)", "requests", "sphinx", "sphinx-rtd-theme"]
+json = ["jsonschema", "pyrsistent", "pyrsistent (==0.16.1)", "requests"]
+protobuf = ["protobuf", "requests"]
 schema-registry = ["requests"]
-protobuf = ["requests", "protobuf"]
-json = ["pyrsistent", "pyrsistent (==0.16.1)", "requests", "jsonschema"]
-doc = ["fastavro (>=1.0)", "fastavro (>=0.23.0,<1.0)", "requests", "avro (==1.10.0)", "sphinx-rtd-theme", "sphinx"]
-dev = ["pytest", "fastavro (>=1.0)", "fastavro (>=0.23.0,<1.0)", "pytest (==4.6.4)", "requests", "avro (==1.10.0)", "flake8", "pytest-timeout"]
-avro = ["fastavro (>=1.0)", "fastavro (>=0.23.0,<1.0)", "requests", "avro (==1.10.0)"]
 
 [[package]]
 name = "coverage"
@@ -123,11 +123,11 @@ cffi = ">=1.12"
 
 [package.extras]
 docs = ["sphinx (>=1.6.5,!=1.8.0,!=3.1.0,!=3.1.1)", "sphinx-rtd-theme"]
-docstest = ["pyenchant (>=1.6.11)", "twine (>=1.12.0)", "sphinxcontrib-spelling (>=4.0.1)"]
+docstest = ["pyenchant (>=1.6.11)", "sphinxcontrib-spelling (>=4.0.1)", "twine (>=1.12.0)"]
 pep8test = ["black", "flake8", "flake8-import-order", "pep8-naming"]
 sdist = ["setuptools_rust (>=0.11.4)"]
 ssh = ["bcrypt (>=3.1.5)"]
-test = ["pytest (>=6.2.0)", "pytest-benchmark", "pytest-cov", "pytest-subtests", "pytest-xdist", "pretend", "iso8601", "pytz", "hypothesis (>=1.11.4,!=3.79.2)"]
+test = ["hypothesis (>=1.11.4,!=3.79.2)", "iso8601", "pretend", "pytest (>=6.2.0)", "pytest-benchmark", "pytest-cov", "pytest-subtests", "pytest-xdist", "pytz"]
 
 [[package]]
 name = "flake8"
@@ -144,7 +144,7 @@ pyflakes = ">=2.5.0,<2.6.0"
 
 [[package]]
 name = "gcn-kafka"
-version = "0.2.2"
+version = "0.2.3"
 description = "Kafka client for NASA's General Coordinates Network (GCN)"
 category = "main"
 optional = false
@@ -184,10 +184,10 @@ optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, != 3.4.*"
 
 [package.extras]
-source = ["Cython (>=0.29.7)"]
-htmlsoup = ["beautifulsoup4"]
-html5 = ["html5lib"]
 cssselect = ["cssselect (>=0.7)"]
+html5 = ["html5lib"]
+htmlsoup = ["beautifulsoup4"]
+source = ["Cython (>=0.29.7)"]
 
 [[package]]
 name = "mccabe"
@@ -217,8 +217,8 @@ optional = false
 python-versions = ">=3.6"
 
 [package.extras]
-testing = ["pytest-benchmark", "pytest"]
-dev = ["tox", "pre-commit"]
+dev = ["pre-commit", "tox"]
+testing = ["pytest", "pytest-benchmark"]
 
 [[package]]
 name = "prometheus-client"
@@ -304,7 +304,7 @@ py = ">=1.8.2"
 tomli = ">=1.0.0"
 
 [package.extras]
-testing = ["xmlschema", "requests", "pygments (>=2.7.2)", "nose", "mock", "hypothesis (>=3.56)", "argcomplete"]
+testing = ["argcomplete", "hypothesis (>=3.56)", "mock", "nose", "pygments (>=2.7.2)", "requests", "xmlschema"]
 
 [[package]]
 name = "pytest-asyncio"
@@ -318,7 +318,7 @@ python-versions = ">=3.7"
 pytest = ">=6.1.0"
 
 [package.extras]
-testing = ["pytest-trio (>=0.7.0)", "mypy (>=0.931)", "flaky (>=3.5.0)", "hypothesis (>=5.7.1)", "coverage (>=6.2)"]
+testing = ["coverage (>=6.2)", "flaky (>=3.5.0)", "hypothesis (>=5.7.1)", "mypy (>=0.931)", "pytest-trio (>=0.7.0)"]
 
 [[package]]
 name = "pytest-cov"
@@ -333,7 +333,7 @@ coverage = {version = ">=5.2.1", extras = ["toml"]}
 pytest = ">=4.6"
 
 [package.extras]
-testing = ["virtualenv", "pytest-xdist", "six", "process-tests", "hunter", "fields"]
+testing = ["fields", "hunter", "process-tests", "pytest-xdist", "six", "virtualenv"]
 
 [[package]]
 name = "requests"
@@ -350,8 +350,8 @@ idna = ">=2.5,<4"
 urllib3 = ">=1.21.1,<1.27"
 
 [package.extras]
-use_chardet_on_py3 = ["chardet (>=3.0.2,<6)"]
 socks = ["PySocks (>=1.5.6,!=1.5.7)"]
+use_chardet_on_py3 = ["chardet (>=3.0.2,<6)"]
 
 [[package]]
 name = "tomli"
@@ -370,14 +370,14 @@ optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*, !=3.5.*, <4"
 
 [package.extras]
+brotli = ["brotli (>=1.0.9)", "brotlicffi (>=0.8.0)", "brotlipy (>=0.6.0)"]
+secure = ["certifi", "cryptography (>=1.3.4)", "idna (>=2.0.0)", "ipaddress", "pyOpenSSL (>=0.14)"]
 socks = ["PySocks (>=1.5.6,!=1.5.7,<2.0)"]
-secure = ["ipaddress", "certifi", "idna (>=2.0.0)", "cryptography (>=1.3.4)", "pyOpenSSL (>=0.14)"]
-brotli = ["brotlipy (>=0.6.0)", "brotli (>=1.0.9)", "brotlicffi (>=0.8.0)"]
 
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "054f0abc0eb8a2d86b06252744a927172b3ed77475217f299a232798a9da866f"
+content-hash = "8899b46a508b287a0a787c654437a1aac82e797fd19093f3466936bc4f7fbfcf"
 
 [metadata.files]
 atomicwrites = [
@@ -580,8 +580,8 @@ flake8 = [
     {file = "flake8-5.0.4.tar.gz", hash = "sha256:6fbe320aad8d6b95cec8b8e47bc933004678dc63095be98528b7bdd2a9f510db"},
 ]
 gcn-kafka = [
-    {file = "gcn-kafka-0.2.2.tar.gz", hash = "sha256:c8179c28b13b3d12a71058e5b68e4216fadb8f2dd2c2551bf88f6773ff09677a"},
-    {file = "gcn_kafka-0.2.2-py3-none-any.whl", hash = "sha256:a22150c60b4d1ff24bc91634d8f10677a25f8c4927121a62d15d71740169d60b"},
+    {file = "gcn-kafka-0.2.3.tar.gz", hash = "sha256:44747bdb0e25362887d9e421f63480c6701a9b6e0a3b3019a799cd905607d308"},
+    {file = "gcn_kafka-0.2.3-py3-none-any.whl", hash = "sha256:ac51a35c1c597786decdbc1cb422d7a012a63c28e221c4a2f20434cf6d33d810"},
 ]
 idna = [
     {file = "idna-3.3-py3-none-any.whl", hash = "sha256:84d9dd047ffa80596e0f246e2eab0b391788b0503584e8945f2368256d2735ff"},
