@@ -10,7 +10,7 @@ click = "*"
 gcn-kafka = "^0.3.0"
 python = "^3.9"
 pygcn = "*"
-prometheus-client = "^0.15.0"
+prometheus-client = "^0.16.0"
 
 [tool.poetry.dev-dependencies]
 flake8 = "*"
