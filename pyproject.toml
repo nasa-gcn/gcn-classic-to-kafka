@@ -12,7 +12,7 @@ python = "^3.9"
 pygcn = "*"
 prometheus-client = "^0.17.0"
 
-[tool.poetry.dev-dependencies]
+[tool.poetry.group.dev.dependencies]
 flake8 = "*"
 pytest = "*"
 pytest-asyncio = "*"
