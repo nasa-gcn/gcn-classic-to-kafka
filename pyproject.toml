@@ -7,6 +7,7 @@ authors = ["Leo Singer <leo.singer@ligo.org>"]
 
 [tool.poetry.dependencies]
 click = "*"
+confluent-kafka = ">=2.2.0"  # first working version with aarch64 wheels
 gcn-kafka = "^0.3.2"
 python = "^3.9"
 pygcn = "*"
