@@ -13,6 +13,7 @@ pygcn = "*"
 prometheus-client = "^0.17.0"
 
 [tool.poetry.group.dev.dependencies]
+black = "*"
 flake8 = "*"
 pytest = "*"
 pytest-asyncio = "*"

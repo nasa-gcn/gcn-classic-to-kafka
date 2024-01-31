@@ -38,7 +38,7 @@ def notice_type_int_to_str(notice_type_int):
     try:
         notice_type_enum = gcn.NoticeType(notice_type_int)
     except ValueError:
-        notice_type_str = 'UNKNOWN'
+        notice_type_str = "UNKNOWN"
     else:
         notice_type_str = notice_type_enum.name
     return notice_type_str
@@ -66,4 +66,4 @@ def topic_for_notice_type_str(notice_type_str, flavor):
     'gcn.classic.voevent.LVC_PRELIMINARY'
 
     """
-    return f'gcn.classic.{flavor}.{notice_type_str}'
+    return f"gcn.classic.{flavor}.{notice_type_str}"
