@@ -34,21 +34,24 @@ def make_packet(bin_notice_type, voe_notice_type=None):
     </What>
     </voe:VOEvent>
     """.encode()
-    text = b'Hello world'
+    text = b"Hello world"
     return (
-        struct.pack('!l156xl', bin_notice_type, len(voevent)) + voevent +
-        struct.pack('!l', len(text)) + text)
+        struct.pack("!l156xl", bin_notice_type, len(voevent))
+        + voevent
+        + struct.pack("!l", len(text))
+        + text
+    )
 
 
 @pytest_asyncio.fixture
 async def start_server():
     producer = mock.Mock()
     cb = client_connected(producer=producer, timeout=timeout)
-    server = await asyncio.start_server(cb, '127.0.0.1')
+    server = await asyncio.start_server(cb, "127.0.0.1")
 
     async with server:
         server_task = asyncio.create_task(server.serve_forever())
-        socket, = server.sockets
+        (socket,) = server.sockets
         host, port = socket.getsockname()
         yield producer, host, port
         server_task.cancel()
@@ -96,10 +99,13 @@ async def test_socket(start_server):
     await writer.drain()
     await asyncio.sleep(0.25 * timeout)
     assert not reader.at_eof()
-    producer.produce.assert_has_calls([
-        mock.call('gcn.classic.binary.LVC_TEST', mock.ANY),
-        mock.call('gcn.classic.voevent.LVC_TEST', mock.ANY),
-        mock.call('gcn.classic.text.LVC_TEST', mock.ANY)])
+    producer.produce.assert_has_calls(
+        [
+            mock.call("gcn.classic.binary.LVC_TEST", mock.ANY),
+            mock.call("gcn.classic.voevent.LVC_TEST", mock.ANY),
+            mock.call("gcn.classic.text.LVC_TEST", mock.ANY),
+        ]
+    )
 
     writer.close()
     await writer.wait_closed()
