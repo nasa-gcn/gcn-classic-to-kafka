@@ -6,6 +6,7 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 """Command line interface."""
+
 import asyncio
 import logging
 import urllib
@@ -17,6 +18,7 @@ import gcn_kafka
 import prometheus_client
 
 from .socket import client_connected
+from . import heartbeat
 from . import metrics
 
 log = logging.getLogger(__name__)
@@ -94,7 +96,10 @@ def main(listen, prometheus, loglevel):
         async with server:
             await server.serve_forever()
 
+    async def run():
+        await asyncio.gather(asyncio.gather(heartbeat.run(producer), serve()))
+
     # Exit cleanly on SIGTERM
     signal.signal(signal.SIGTERM, signal_handler)
 
-    asyncio.run(serve())
+    asyncio.run(run())
