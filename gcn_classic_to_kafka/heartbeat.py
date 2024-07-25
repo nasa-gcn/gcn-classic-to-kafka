@@ -18,6 +18,11 @@ TIMEOUT = 1
 TOPIC = "gcn.heartbeat"
 
 
+def iso8601_now():
+    """Return the current time as an ISO 8601 string, ending in 'Z'."""
+    return datetime.datetime.now(datetime.UTC).isoformat().split("+")[0] + "Z"
+
+
 async def run(producer: confluent_kafka.Producer):
     """Produce a heartbeat message once per second."""
     log.info("Producing heartbeats every %d second(s) on topic %s", TIMEOUT, TOPIC)
@@ -27,7 +32,7 @@ async def run(producer: confluent_kafka.Producer):
             json.dumps(
                 {
                     "$schema": "https://gcn.nasa.gov/docs/schema/v4.1.0/gcn/notices/core/Alert.schema.json",
-                    "alert_datetime": datetime.datetime.now(datetime.UTC).isoformat(),
+                    "alert_datetime": iso8601_now(),
                 }
             ),
         )
