@@ -9,17 +9,16 @@
 
 import asyncio
 import logging
-import urllib
 import signal
 import sys
+import urllib
 
 import click
 import gcn_kafka
 import prometheus_client
 
+from . import heartbeat, metrics
 from .socket import client_connected
-from . import heartbeat
-from . import metrics
 
 log = logging.getLogger(__name__)
 

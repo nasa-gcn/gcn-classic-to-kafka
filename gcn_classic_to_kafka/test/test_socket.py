@@ -6,8 +6,8 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 import asyncio
-from unittest import mock
 import struct
+from unittest import mock
 
 import gcn
 import pytest

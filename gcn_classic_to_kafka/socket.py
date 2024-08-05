@@ -6,6 +6,7 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 """Protocol handler for GCN socket connection."""
+
 import asyncio
 import logging
 import struct
@@ -14,8 +15,8 @@ import confluent_kafka
 import gcn
 import lxml.etree
 
-from .common import notice_type_int_to_str, topic_for_notice_type_str
 from . import metrics
+from .common import notice_type_int_to_str, topic_for_notice_type_str
 
 log = logging.getLogger(__name__)
 
@@ -29,7 +30,6 @@ ignore_notice_types = {
 
 
 def client_connected(producer: confluent_kafka.Producer, timeout: float = 90):
-
     async def client_connected_cb(
         reader: asyncio.StreamReader, writer: asyncio.StreamWriter
     ):
